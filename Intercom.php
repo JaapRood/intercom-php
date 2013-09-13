@@ -195,6 +195,7 @@ class Intercom
      * @param  string $lastSeenUserAgent The last user agent of the user's browser (optional)
      * @param  long   $lastRequestAt     UNIX timestamp of the user's last request (optional)
      * @param  string $method            HTTP method, to be used by updateUser()
+     * @param  array  $companies         Array of companies the user is a member of           
      * @return object
      **/
     public function createUser($id,
@@ -205,7 +206,8 @@ class Intercom
                                $lastSeenIp = null,
                                $lastSeenUserAgent = null,
                                $lastRequestAt = null,
-                               $method = 'POST')
+                               $method = 'POST',
+                               $companies = null)
     {
         $data = array();
 
@@ -237,6 +239,10 @@ class Intercom
 
         if (!empty($customData)) {
             $data['custom_data'] = $customData;
+        }
+
+        if (!empty($companies)) {
+            $data['companies'] = $companies;
         }
 
         $path = 'users';
